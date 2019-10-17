@@ -2,7 +2,7 @@
     <div id="container">
         <form action="http://localhost:3005/users" method="post">
             <div id="inputs">
-                <input id="name" class="inputs" type="text" name="name" @change="this.userInputs" v-model="name" placeholder="first name...">
+                <input id="name" class="inputs" type="text" name="name" v-model="name" placeholder="first name...">
                 <input id="email" class="inputs" type="text" name="email" @change="this.emailIsValid" v-model="email" placeholder="email...">
                 <input id="password" class="inputs" type="text" name="password" @change="this.userInputs" v-model="password" placeholder="password...">
                 <button id="button" class="inputs" type="submit" value="send!" ref="button">
@@ -12,8 +12,11 @@
                         Go!
                     <font-awesome-icon id="arrow" icon="angle-double-right"></font-awesome-icon>
                 </button>
-                <p v-if="this.validity === false && this.inputsEdited === true" id="indicator">Invalid e-mail address</p>
+                <div id="alerts">
+                    <p v-if="this.validity === false && this.inputsEdited === true" id="indicator">Invalid e-mail address</p>
+                </div>
             </div>
+            
         </form>
         <ul>
             <!-- <li>{{name}}</li>
@@ -42,6 +45,7 @@
         methods: {
             emailIsValid: function (email) {
                 email = this.email
+                
             
                 this.validity = /\S+@\S+\.\S+/.test(email)
                 console.log(`emailIsValid:${this.validity}`)
@@ -56,9 +60,11 @@
                 console.log(`userInputs:${this.inputsEdited}`)
             },
             send: function() {
+                let send = this.$refs.button;
                 if (this.validity === true && this.inputsEdited === true) {
-                    let send = this.$refs.button;
                     send.style.color = '#2ed573';
+                } else if (this.validity === false && this.inputsEdited === true) {
+                    send.style.color = '#ff4757';
                 }
             },
             
@@ -74,8 +80,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color:#ced6e0;
-    padding: 10px;
+    /* background-color:#ced6e0; */
+    /* padding: 10px;
     border-radius: 7%; */
 }
 form {
@@ -97,6 +103,9 @@ button:focus {
     width: 75%;
     height: 75%;
     justify-content: space-between
+}
+#alerts {
+    height: 25%;
 }
 .inputs {
     height: 10%;
