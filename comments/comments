@@ -1,0 +1,29 @@
+            allUsers: async function() {
+                // let obj = {
+                //     name: this.name,
+                //     email: this.email,
+                //     password: this.password
+                // }
+                // console.log(obj);
+                // try {
+                //     await fetch('http://localhost:3005/users', {
+                //         method: 'post',
+                //         body: JSON.stringify(obj)
+                //     })
+                //     .then((res) => res.json())                    
+                //     .then(function(data) {
+                //         console.log(data);
+                //     });
+                //     // const users = await res.json();
+                //     // this.users = users;
+                // } catch (e) {
+                //     console.log(e)
+                // };
+            },
+            // sendData: async function() {
+            //     try {
+            //         const send = await fetch(`https://localhost:3005/`);
+            //     } catch (e) {
+            //         console.log(e)
+            //     }
+            // }
