@@ -48,17 +48,17 @@
         },
         methods: {
             emailIsValid: function (email) {
-                email = this.email
+                email = this.email;
                 
             
-                this.validity = /\S+@\S+\.\S+/.test(email)
-                console.log(`emailIsValid:${this.validity}`)
+                this.validity = /\S+@\S+\.\S+/.test(email);
+                console.log(`emailIsValid:${this.validity}`);
                 this.send();
             },
             userInputs: function() {
                 if (this.name !== '' && this.email !== '' && this.password !== '') {
-                    this.inputsEdited = true
-                    this.show = true
+                    this.inputsEdited = true;
+                    this.show = true;
                 }
 
                 console.log(`userInputs:${this.inputsEdited}`)
@@ -74,7 +74,7 @@
             },
             togglePassword: function() {
                 let pass = this.$refs.pass;
-                console.log(pass.type)
+                console.log(pass.type);
 
                 if (pass.type === "password") {
                     pass.type = "text";
