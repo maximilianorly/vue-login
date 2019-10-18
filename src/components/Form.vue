@@ -1,9 +1,10 @@
 <template>
     <div id="container">
         <form action="http://localhost:3005/users" method="post">
+            <h1 id="title">Sign Up</h1>
             <div id="inputs">
                 <div id="user">
-                    <input id="name" class="inputs" type="text" name="name" v-model="name" autocomplete="off" placeholder="first name...">
+                    <input id="name" class="inputs" type="text" name="name" v-model="name" autocomplete="off" placeholder="username...">
                     <input id="email" class="inputs" type="text" name="email" @keydown="this.emailIsValid" v-model="email" autocomplete="off" placeholder="email...">
                     <input id="password" class="inputs" ref="pass" type="password" name="password" @keyup="this.userInputs" v-model="password" autocomplete="off" placeholder="password...">
                     <button id="button" class="inputs" type="submit" value="send!" ref="button">
@@ -15,7 +16,11 @@
                     </button>
                 </div>
                 <div id="validation">
-                    <input type="checkbox" @click="this.togglePassword"> show password
+                    <div id="passwordToggle">
+                        <input type="checkbox" @click="this.togglePassword">
+                        <div v-if="this.visibilePassword === false">show password</div>
+                        <div v-else>hide password</div>
+                    </div>
                     <div id="alerts">
                         <p v-if="this.validity === false && this.inputsEdited === true" id="indicator">The provided email address is not valid</p>
                     </div>
@@ -44,6 +49,7 @@
                 show: false,
                 validity: false,
                 inputsEdited: false,
+                visibilePassword: false
             }
         },
         methods: {
@@ -78,8 +84,10 @@
 
                 if (pass.type === "password") {
                     pass.type = "text";
+                    this.visibilePassword = true;
                 } else {
                     pass.type = "password";
+                    this.visibilePassword = false;
                 }
             }
 
@@ -102,10 +110,16 @@ form {
     height: 75%;
     width: 75%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color:#5352ed;
     border-radius: 7%;
+    box-shadow: 0px 0px 30px 2px #1e3799;
+}
+#title {
+    color: white;
+    text-shadow: 2px 2px 5px #70a1ff
 }
 input:focus,
 button:focus {
@@ -148,6 +162,13 @@ button:focus {
     padding: 0 1vw 0 1vw;
     align-items: center;
     color: #747d8c;
+    box-shadow: 5px 5px 20px 5px #3742fa;
+}
+
+#passwordToggle {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
 }
 
 #check {
