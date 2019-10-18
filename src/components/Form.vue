@@ -3,9 +3,9 @@
         <form action="http://localhost:3005/users" method="post">
             <div id="inputs">
                 <div id="user">
-                    <input id="name" class="inputs" type="text" name="name" v-model="name" placeholder="first name...">
-                    <input id="email" class="inputs" type="text" name="email" @keydown="this.emailIsValid" v-model="email" placeholder="email...">
-                    <input id="password" class="inputs" ref="pass" type="password" name="password" @keyup="this.userInputs" v-model="password" placeholder="password...">
+                    <input id="name" class="inputs" type="text" name="name" v-model="name" autocomplete="off" placeholder="first name...">
+                    <input id="email" class="inputs" type="text" name="email" @keydown="this.emailIsValid" v-model="email" autocomplete="off" placeholder="email...">
+                    <input id="password" class="inputs" ref="pass" type="password" name="password" @keyup="this.userInputs" v-model="password" autocomplete="off" placeholder="password...">
                     <button id="button" class="inputs" type="submit" value="send!" ref="button">
                         <font-awesome-icon v-if="this.show === true && this.validity === true" id="check" icon="check-circle"></font-awesome-icon>
                         <font-awesome-icon v-else-if="this.show === true && this.validity === false" id="cross" icon="times-circle"></font-awesome-icon>
