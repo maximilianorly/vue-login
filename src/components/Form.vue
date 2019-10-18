@@ -2,21 +2,25 @@
     <div id="container">
         <form action="http://localhost:3005/users" method="post">
             <div id="inputs">
-                <input id="name" class="inputs" type="text" name="name" v-model="name" placeholder="first name...">
-                <input id="email" class="inputs" type="text" name="email" @change="this.emailIsValid" v-model="email" placeholder="email...">
-                <input id="password" class="inputs" type="text" name="password" @change="this.userInputs" v-model="password" placeholder="password...">
-                <button id="button" class="inputs" type="submit" value="send!" ref="button">
-                    <font-awesome-icon v-if="this.show === true && this.validity === true" id="check" icon="check-circle"></font-awesome-icon>
-                    <font-awesome-icon v-else-if="this.show === true && this.validity === false" id="cross" icon="times-circle"></font-awesome-icon>
-                    <font-awesome-icon v-else id="userEdit" icon="user-edit"></font-awesome-icon>
-                        Go!
-                    <font-awesome-icon id="arrow" icon="angle-double-right"></font-awesome-icon>
-                </button>
-                <div id="alerts">
-                    <p v-if="this.validity === false && this.inputsEdited === true" id="indicator">Invalid e-mail address</p>
+                <div id="user">
+                    <input id="name" class="inputs" type="text" name="name" v-model="name" placeholder="first name...">
+                    <input id="email" class="inputs" type="text" name="email" @keydown="this.emailIsValid" v-model="email" placeholder="email...">
+                    <input id="password" class="inputs" ref="pass" type="password" name="password" @keyup="this.userInputs" v-model="password" placeholder="password...">
+                    <button id="button" class="inputs" type="submit" value="send!" ref="button">
+                        <font-awesome-icon v-if="this.show === true && this.validity === true" id="check" icon="check-circle"></font-awesome-icon>
+                        <font-awesome-icon v-else-if="this.show === true && this.validity === false" id="cross" icon="times-circle"></font-awesome-icon>
+                        <font-awesome-icon v-else id="userEdit" icon="user-edit"></font-awesome-icon>
+                            Go!
+                        <font-awesome-icon id="arrow" icon="angle-double-right"></font-awesome-icon>
+                    </button>
+                </div>
+                <div id="validation">
+                    <input type="checkbox" @click="this.togglePassword"> show password
+                    <div id="alerts">
+                        <p v-if="this.validity === false && this.inputsEdited === true" id="indicator">The provided email address is not valid</p>
+                    </div>
                 </div>
             </div>
-            
         </form>
         <ul>
             <!-- <li>{{name}}</li>
@@ -58,6 +62,7 @@
                 }
 
                 console.log(`userInputs:${this.inputsEdited}`)
+                this.send();
             },
             send: function() {
                 let send = this.$refs.button;
@@ -67,7 +72,16 @@
                     send.style.color = '#ff4757';
                 }
             },
-            
+            togglePassword: function() {
+                let pass = this.$refs.pass;
+                console.log(pass.type)
+
+                if (pass.type === "password") {
+                    pass.type = "text";
+                } else {
+                    pass.type = "password";
+                }
+            }
 
         }
     }
@@ -103,6 +117,18 @@ button:focus {
     width: 75%;
     height: 75%;
     justify-content: space-between
+}
+
+#user {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+#validation {
+    height: 20%;
+    width: 100%;
 }
 #alerts {
     height: 25%;
